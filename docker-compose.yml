@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+
+  push-service:
+    image: push-service:latest
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongo
+    restart: on-failure
+    networks:
+      - vnetwork
+
+  mongo:
+    image: mongo
+    container_name: mongo_db
+    ports:
+      - '27017:27017'
+    restart: on-failure
+    networks:
+      - vnetwork
+
+networks: 
+  vnetwork:
+    name: virtual-network
